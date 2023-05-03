@@ -6,7 +6,6 @@ const archivoBD = require('./conexion')
 
 //Archivo de rutas y modelos
 const rutausuario = require('./rutas/usuario')
-//const rutaeventos = require('./rutas/eventos')
 
 // Informacion en los campos
 const bodyParser = require('body-parser')
@@ -14,7 +13,6 @@ app.use(bodyParser.json())
 app.unsubscribe(bodyParser.urlencoded({extended:'true'}))
 
 app.use('/api/usuario', rutausuario)
-//app.use('/api/eventos', rutaeventos)
 
 
 app.get('/', (req,res) => {
