@@ -39,7 +39,7 @@ router.post('/agregarusuario', (req, res) => {
     edad: req.body.edad,
     sexo: req.body.sexo,
     tipoVinculo: req.body.tipoVinculo,
-    formacion: req.body.dormacion,
+    formacion: req.body.formacion,
     idusuario: req.body.idusuario
     })
     nuevousuario.save()
@@ -62,4 +62,52 @@ router.get('/obtenerusuarios', (req,res)=> {
         });
 });
 
+//Datos usuarios
+router.post('/obtenerdatausuarios', (req, res) => {
+    ModeloUsuario.find({idusuario:req.body.idusuario}, function(docs,err){
+        if(!err){
+            res.send(docs)
+        }else{
+            res.send(err)
+        }
+
+    })
+       
+    });
+   
+//actualizar
+router.post('/actualizarusuario', (req, res) => {
+
+    ModeloUsuario.findOneAndUpdate({idusuario:req.body.idusuario}, {
+        nombre: req.body.nombre,
+        apellido: req.body.apellido,
+        cc: req.body.cc,
+        correo: req.body.correo,
+        telefono: req.body.telefono,
+        edad: req.body.edad,
+        sexo: req.body.sexo,
+        tipoVinculo: req.body.tipoVinculo,
+        formacion: req.body.formacion,
+        idusuario: req.body.idusuario
+    },(err) =>{
+        if(!err){
+        res.send('usuario actualizado')
+        } else {
+            res.send(err)
+        }
+
+        })
+});
+
+router.post('/borrarusuario', (req, res) => {
+    ModeloUsuario.findByIdAndDelete({ idusuario: req.query.idusuario }, (err) => {
+      if (!err) {
+        res.send('Usuario eliminado')
+      } else {
+        res.send(err)
+      }
+    })
+  })
+
+   
 
